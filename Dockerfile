@@ -12,9 +12,11 @@ RUN apk update && \
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
 COPY package.json ./
-RUN npm install \
-    npm update \
-    npm audit fix --force
+RUN npm install && \
+    npm uninstall -g cross-spawn && \
+    npm cache clean --force && \
+    find /usr/local/lib/node_modules -name "cross-spawn" -type d -exec rm -rf {} + && \
+    npm install -g cross-spawn@7.0.5 --force
 
 # Etap 2
 
