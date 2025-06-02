@@ -70,7 +70,7 @@ jobs:
         name: Scan ARM image for vulnerabilities
         uses: aquasecurity/trivy-action@0.30.0
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ fromJson(steps.meta.outputs.json).tags[0] }}
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
@@ -96,7 +96,7 @@ jobs:
         name: Scan AMD image for vulnerabilities
         uses: aquasecurity/trivy-action@0.30.0
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ fromJson(steps.meta.outputs.json).tags[0] }}
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
