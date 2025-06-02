@@ -3,7 +3,7 @@
 Repository provides pipeline for web application built in the first exercise
 
 > [!WARNING]
-> Repository is mainly a copy of [this application](https://github.com/MedrekIT/cloud_ex2) but provides pipeline for it
+> Repository is mainly a copy of [this application](https://github.com/MedrekIT/cloud_ex2) but provides pipeline for it.
 > Source code is commented in Polish language
 
 ---
