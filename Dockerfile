@@ -13,8 +13,9 @@ RUN apk update && \
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
 COPY package.json ./
-RUN npm install
-RUN npm install cross-spawn@8.0.0
+RUN npm install \
+    npm remove cross-spawn \
+    npm install cross-spawn
 
 # Etap 2
 
