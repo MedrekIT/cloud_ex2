@@ -11,9 +11,9 @@ RUN apk update && \
 
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
-COPY package.json ./
+COPY package.json package-lock.json ./
 RUN npm install \
-    npm update
+    npm ci
 
 # Etap 2
 
