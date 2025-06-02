@@ -53,6 +53,8 @@ jobs:
       -
         name: Build Docker image
         uses: docker/build-push-action@v5
+        run: |
+          echo ${{ steps.meta.outputs.tags }}
         with:
           context: .
           file: ./Dockerfile
@@ -63,7 +65,10 @@ jobs:
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache
           cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache,mode=max
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ghcr.io/${{ github.repository }}:tags
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
 
       -
         name: Scan Docker image for vulnerabilities
