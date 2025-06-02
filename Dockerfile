@@ -1,7 +1,7 @@
 # Etap 1
 
 # Instalacja obrazu i określenie autora pliku
-FROM node:20-alpine AS dev_app
+FROM node:lts-alpine AS dev_app
 LABEL org.opencontainers.image.authors="Daniel Mędrek"
 
 # Instalacja niezbędnych zależności
@@ -11,14 +11,14 @@ RUN apk update && \
 
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install \
     npm update
 
 # Etap 2
 
 # Instalacja obrazu z zależnością node i określenie autora pliku
-FROM node:20-alpine AS prod_app
+FROM node:lts-alpine AS prod_app
 LABEL org.opencontainers.image.authors="Daniel Mędrek"
 
 # Instalacja zależności curl
@@ -30,8 +30,7 @@ RUN apk update && \
 WORKDIR /app
 
 COPY --from=dev_app /app/node_modules ./node_modules
-COPY ./app.js .
-COPY ./public/* ./public/
+COPY . .
 
 # Informacja o umożliwieniu aplikacji nasłuchiwania na porcie 3000
 EXPOSE 3000
