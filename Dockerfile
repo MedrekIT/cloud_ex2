@@ -12,8 +12,7 @@ RUN apk update && \
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install \
-    npm ci
+RUN npm ci
 
 # Etap 2
 
@@ -30,7 +29,8 @@ RUN apk update && \
 WORKDIR /app
 
 COPY --from=dev_app /app/node_modules ./node_modules
-COPY . .
+COPY ./app.js .
+COPY ./public/* ./public/
 
 # Informacja o umożliwieniu aplikacji nasłuchiwania na porcie 3000
 EXPOSE 3000
