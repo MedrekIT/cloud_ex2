@@ -21,19 +21,7 @@ Repository provides pipeline for web application built in the first exercise
 
 ## Screenshots
 
-![Image building](./screenshots/build.png)
-
-![Container running](./screenshots/run.png)
-
-![Testing homepage](./screenshots/test_home.png)
-
-![Testing weather infromation](./screenshots/test_weather.png)
-
-![Healthcheck](./screenshots/healthcheck.png)
-
-![Container logs](./screenshots/logs.png)
-
-![Image layers info](./screenshots/layers.png)
+![Action workflow](./screenshots/workflow.png)
 
 ---
 
