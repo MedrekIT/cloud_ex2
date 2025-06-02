@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Pogoda</title>
+</head>
+<body>
+  <h1>Sprawdź pogodę</h1>
+  <form action="/weather" method="POST">
+    <label for="country">Kraj:</label>
+    <select name="country">
+      <option value="PL">Polska</option>
+      <option value="DE">Niemcy</option>
+      <option value="FR">Francja</option>
+    </select><br><br>
+    <label for="city">Miasto:</label>
+    <input type="text" name="city" placeholder="np. Warszawa" required /><br><br>
+    <button type="submit">Sprawdź</button>
+  </form>
+</body>
+</html>
