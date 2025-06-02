@@ -13,9 +13,8 @@ RUN apk update && \
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
 COPY package.json ./
-RUN npm install -g npm-force-resolutions \
-  && npx npm-force-resolutions \
-  && npm install
+RUN npm install
+RUN npm install cross-spawn
 
 # Etap 2
 
