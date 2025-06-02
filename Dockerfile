@@ -14,7 +14,8 @@ RUN apk update && \
 WORKDIR /app
 COPY package.json ./
 RUN npm install \
-    npm update
+    npm update \
+    npm audit fix
 
 # Etap 2
 
