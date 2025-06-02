@@ -14,8 +14,7 @@ RUN apk update && \
 WORKDIR /app
 COPY package.json ./
 RUN npm install \
-    npm remove cross-spawn \
-    npm install cross-spawn
+    npm update
 
 # Etap 2
 
