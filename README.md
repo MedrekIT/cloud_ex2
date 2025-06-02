@@ -202,7 +202,7 @@ on:
 ```yml
 -
     name: Scan Docker image for vulnerabilities
-    uses: aquasecurity/trivy-action@v0.16.1
+    uses: aquasecurity/trivy-action@0.30.0
     with:
         image-ref: ${{ steps.meta.outputs.tags }}
         format: table
