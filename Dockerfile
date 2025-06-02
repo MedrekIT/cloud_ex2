@@ -1,8 +1,7 @@
 # Etap 1
 
 # Instalacja obrazu i określenie autora pliku
-FROM scratch AS dev_app
-ADD alpine-minirootfs-3.21.3-aarch64.tar /
+FROM node:20-alpine AS dev_app
 LABEL org.opencontainers.image.authors="Daniel Mędrek"
 
 # Instalacja niezbędnych zależności
@@ -13,7 +12,9 @@ RUN apk update && \
 # Kopiowanie pliku package z informacjami dla serwera node i instalacja zależności
 WORKDIR /app
 COPY package.json ./
-RUN npm ci && npm audit fix --force
+RUN npm install \
+    npm update \
+    npm audit fix
 
 # Etap 2
 
