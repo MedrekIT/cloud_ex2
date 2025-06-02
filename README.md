@@ -45,8 +45,7 @@ cd cloud_ex2
 ```
 
 > [!IMPORTANT]
-> To make it work, you will need to install suitable image from [Alpine page](https://www.alpinelinux.org/downloads/) or change to desired image in your [Dockerfile](./Dockerfile)
-> Also, you will need to provide your own API key from [OpenWeather page](https://openweathermap.org/api) to your [".env" file](./.env)
+> You will need to provide your own API key from [OpenWeather page](https://openweathermap.org/api) to your [".env" file](./.env)
 
 ---
 
