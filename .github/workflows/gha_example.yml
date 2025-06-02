@@ -51,10 +51,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       -
-        name: Build Docker image
-        uses: docker/build-push-action@v5
+        name: Testing
         run: |
           echo ${{ steps.meta.outputs.tags }}
+          echo "ghcr.io/${{ github.repository }}:tags"
+          echo "ghcr.io/${{ github.repository }}:${{ github.sha }}"
+
+      -
+        name: Build Docker image
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
