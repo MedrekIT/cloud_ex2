@@ -13,10 +13,8 @@ RUN apk update && \
 WORKDIR /app
 COPY package.json ./
 RUN npm install && \
-    npm uninstall -g cross-spawn && \
-    npm cache clean --force && \
-    find /usr/local/lib/node_modules -name "cross-spawn" -type d -exec rm -rf {} + && \
-    npm install -g cross-spawn@7.0.5 --force
+    npm update && \
+    npm audit fix
 
 # Etap 2
 
