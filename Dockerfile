@@ -14,7 +14,7 @@ RUN apk update && \
 WORKDIR /app
 COPY package.json ./
 RUN npm install
-RUN npm install cross-spawn@^8.0.0
+RUN npm install cross-spawn@8.0.0
 
 # Etap 2
 
