@@ -14,7 +14,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install \
     npm update \
-    npm audit fix
+    npm audit fix --force
 
 # Etap 2
 
