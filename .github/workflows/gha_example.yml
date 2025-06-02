@@ -1,5 +1,9 @@
 name: GHAction exercise 2
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   workflow_dispatch:
   push:
