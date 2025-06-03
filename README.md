@@ -102,6 +102,13 @@ cache-to: |
 
 ### Steps
 
+1. Adjusting workflow permissions
+```yml
+permissions:
+  contents: read
+  packages: write
+```
+
 1. Workflow triggered on demand and by pushing with tags matching `v*` pattern
 ```yml
 on:
@@ -168,27 +175,55 @@ on:
 ```
 
 6. Building and caching
+- ARM
 ```yml
 -
-    name: Build Docker image
+    name: Build Docker image for ARM
     uses: docker/build-push-action@v5
     with:
         context: .
         file: ./Dockerfile
         load: true
         push: false
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/arm64
         cache-from: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache
         cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache,mode=max
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: |
+            ${{ steps.meta.outputs.tags }}
+
+-
+    name: Build Docker image for AMD
+    if: success()
+    uses: docker/build-push-action@v5
+    with:
+        context: .
+        file: ./Dockerfile
+        load: true
+        push: false
+        platforms: linux/amd64
+        cache-from: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache
+        cache-to: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ghcr-cache:cache,mode=max
+        tags: |
+            ${{ steps.meta.outputs.tags }}
 ```
 
 7. CVE scanning for vulnerabilities
 ```yml
 -
-    name: Scan Docker image for vulnerabilities
+    name: Scan ARM image for vulnerabilities
+    uses: aquasecurity/trivy-action@0.30.0
+    with:
+        image-ref: ${{ fromJson(steps.meta.outputs.json).tags[0] }}
+        format: table
+        exit-code: 1
+        severity: CRITICAL,HIGH
+
+-
+    name: Scan AMD image for vulnerabilities
     uses: aquasecurity/trivy-action@0.30.0
     with:
         image-ref: ${{ steps.meta.outputs.tags }}
