@@ -1,6 +1,6 @@
 const express = require('express')
 // Używamy fetch do pobierania danych pogodowych
-const fetch = require('node-fetch')
+const axios = require('axios')
 const path = require('path')
 // Ładujemy zmienne środowiskowe z .env
 require('dotenv').config()
@@ -31,19 +31,28 @@ app.post('/weather', async (req, res) => {
 
   try {
     // Asynchroniczne pobranie informacji o pogodzie
-    const response = await fetch(url)
-    const data = await response.json()
+    const response = await axios(url)
+    const data = await response.data
     if (data.cod !== 200) {
       return res.send(`<h2>Błąd: ${data.message}</h2>`)
     }
 
     // Wypisanie danych pogodowych
     res.send(`
+      <html lang="pl">
+      <head>
+      <meta charset="UTF-8">
+      <title>Pogoda - ${data.name}</title>
+      <link rel="stylesheet" href="/css/style.css">
+      </head>
+      <body>
       <h2>Pogoda dla: ${data.name}, ${data.sys.country}</h2>
       <p>Temperatura: ${data.main.temp} °C</p>
       <p>Wilgotność: ${data.main.humidity}%</p>
       <p>Warunki: ${data.weather[0].description}</p>
       <a href="/">Powrót</a>
+      </body>
+      </html>
     `)
   } catch (err) {
     res.send(`
